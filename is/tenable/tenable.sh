@@ -6,6 +6,8 @@ name="$4"
 
 echo "=== Nessus agent instalaltion process ==="
 
+source /etc/os-release 
+source /etc/os-release | echo "$NAME"
 source /etc/os-release | echo "$NAME"
 
 
