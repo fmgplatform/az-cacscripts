@@ -1,17 +1,16 @@
 #!/bin/bash
-key="$1"
-port="$2"
-groups="$3"
-name="$4"
+$OS="$1"
+key="$2"
+port="$3"
+groups="$4"
+name="$5"
 
 echo "=== Nessus agent instalaltion process ==="
 
-source /etc/os-release 
-source /etc/os-release | echo "$NAME"
-source /etc/os-release | echo "$NAME"
+echo "the os name is $OS"
 
 
-if [[ "$NAME" == "Ubuntu" ]]
+if [[ "$OS" == "UbuntuServer" ]]
 then
 echo "Creating temporary directory to install nessus agent in Ubuntu..."
 sudo mkdir /home/nessus
