@@ -80,7 +80,6 @@ then
   echo "Boomi service already exists."
 else    
   echo "Creating Boomi service..."
-
   sudo echo  "[Unit]
   Description=Dell Boomi [atomName]
   After=network.target
@@ -102,10 +101,10 @@ else
   GuessMainPID=no
   [Install]
   WantedBy=multi-user.target" > /etc/systemd/system/boomi.service
-
+  # Reload Systemd to apply changes.
   sudo systemctl daemon-reload
+  # Enable Service
   sudo systemctl enable boomi.service
-  sudo systemctl daemon-reload
 fi
 
 # Only start if we have boomi installed.
