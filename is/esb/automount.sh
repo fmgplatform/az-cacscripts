@@ -75,35 +75,44 @@ fi
 #  echo "Boomi not installed, do nothing"
 #fi
 
-sudo echo  "[Unit]
-Description=Dell Boomi [atomName]
-After=network.target
-RequiresMountsFor=[installDirMountPoint]
-[Service]
-Type=forking
-User=root
-ExecStart=/data/boomi/bin/atom start
-ExecStop=/data/boomi/bin/atom stop
-ExecReload=/data/boomi/bin/atom restart
-LimitAS=infinity
-LimitRSS=infinity
-LimitCORE=infinity
-LimitNOFILE=3048576
-Restart=always
-TimeoutSec=5min
-IgnoreSIGPIPE=no
-KillMode=process
-GuessMainPID=no
-[Install]
-WantedBy=multi-user.target" > /etc/systemd/system/boomi.service
+if systemctl --all --type service | grep -q "boomi"
+then
+  echo "Boomi service already exists."
+else    
+  echo "Creating Boomi service..."
 
-sudo systemctl daemon-reload
-sudo systemctl enable boomi.service
-sudo systemctl daemon-reload
-#only start if we have boomi installed.
+  sudo echo  "[Unit]
+  Description=Dell Boomi [atomName]
+  After=network.target
+  RequiresMountsFor=[installDirMountPoint]
+  [Service]
+  Type=forking
+  User=root
+  ExecStart=/data/boomi/bin/atom start
+  ExecStop=/data/boomi/bin/atom stop
+  ExecReload=/data/boomi/bin/atom restart
+  LimitAS=infinity
+  LimitRSS=infinity
+  LimitCORE=infinity
+  LimitNOFILE=3048576
+  Restart=always
+  TimeoutSec=5min
+  IgnoreSIGPIPE=no
+  KillMode=process
+  GuessMainPID=no
+  [Install]
+  WantedBy=multi-user.target" > /etc/systemd/system/boomi.service
+
+  sudo systemctl daemon-reload
+  sudo systemctl enable boomi.service
+  sudo systemctl daemon-reload
+fi
+
+# Only start if we have boomi installed.
 if [ -d "/data/boomi/bin" ] 
 then
-     systemctl start boomi.service 
+    echo "Starting Boomi service (if not already started)..."
+    systemctl start boomi.service 
 else
   echo "Boomi not installed, do nothing"
-fi
+fi  
