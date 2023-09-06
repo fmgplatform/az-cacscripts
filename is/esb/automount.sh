@@ -78,7 +78,7 @@ fi
 sudo echo  "[Unit]
 Description=Dell Boomi [atomName]
 After=network.target
-RequiresMountsFor=[installDirMountPoint]
+RequiresMountsFor=/data/boomi/bin
 [Service]
 Type=forking
 User=root
