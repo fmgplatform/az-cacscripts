@@ -26,7 +26,7 @@ fi
 
 sudo apt-get -y update
 sudo apt-get -y install nfs-common
-sudo apt install nfs-kernel-server
+sudo apt-get -y install nfs-kernel-server
 
 #create the drive that is being mapped to if doesn't exist
 if [ ! -d $4 ]; then
