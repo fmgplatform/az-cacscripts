@@ -30,7 +30,7 @@ sudo apt-get -y install nfs-kernel-server
 
 #create the drive that is being mapped to if doesn't exist
 if [ ! -d $3 ]; then
-  echo "missing directory, creating $4"
+  echo "missing directory, creating $3"
   sudo mkdir -p $3
   sudo chmod 777 $3
 fi
