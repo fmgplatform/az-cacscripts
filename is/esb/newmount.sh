@@ -39,7 +39,7 @@ if [ ! -z $3 ]; then
   #added in code to check if the map data command is already in the fstab file
   MAPVALUE="//mount -t nfs $1.file.core.windows.net/$2 $3 -o vers=4,minorversion=1,sec=sys,nconnect=4"
   if !( grep //etc/fstab -e "$MAPVALUE" ); then
-     echo $MAPVALUE  >> /etc/fstab 
+    sudo echo $MAPVALUE  >> /etc/fstab 
      echo "mappped $MAPVAULE"
   fi
 fi 
