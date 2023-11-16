@@ -1,6 +1,6 @@
 #!/bin/bash
 # $1 = Azure storage account name 
-# $2 = Azure storage account key # since the current mount is NFS file share,  key is not used 
+# $2 = Azure storage account key # In the NFS file share,  key is not used 
 # $2 = Azure file share name 
 # $3 = Mountpoint path (required for multi-instance VMSS, else set to empty string) 
 
