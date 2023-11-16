@@ -1,8 +1,8 @@
 #!/bin/bash
 # $1 = Azure storage account name 
-# $2 = Azure storage account key 
-# $3 = Azure file share name 
-# $4 = Mountpoint path (required for multi-instance VMSS, else set to empty string) 
+# $2 = Azure storage account key # since the current mount is NFS file share key is not used 
+# $2 = Azure file share name 
+# $3 = Mountpoint path (required for multi-instance VMSS, else set to empty string) 
 
 sudo bash -c 'echo "fs.file-max = 1048576" >> /etc/sysctl.conf'
 sudo sysctl -p
@@ -29,16 +29,16 @@ sudo apt-get -y install nfs-common
 sudo apt-get -y install nfs-kernel-server
 
 #create the drive that is being mapped to if doesn't exist
-if [ ! -d $4 ]; then
+if [ ! -d $3 ]; then
   echo "missing directory, creating $4"
-  sudo mkdir -p $4
-  sudo chmod 777 $4
+  sudo mkdir -p $3
+  sudo chmod 777 $3
 fi
 
 # Map storage account to drive if 4 parameters exist.
-if [ ! -z $4 ]; then
+if [ ! -z $3 ]; then
   #added in code to check if the map data command is already in the fstab file
-  MAPVALUE="//mount -t nfs $1.file.core.windows.net/$3 $4 -o vers=4,minorversion=1,sec=sys,nconnect=4"
+  MAPVALUE="//mount -t nfs $1.file.core.windows.net/$2 $3 -o vers=4,minorversion=1,sec=sys,nconnect=4"
   if !( grep //etc/fstab -e "$MAPVALUE" ); then
     sudo echo $MAPVALUE  >> /etc/fstab 
     sudo echo "mappped $MAPVAULE"
