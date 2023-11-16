@@ -34,13 +34,13 @@ if [ ! -d $3 ]; then
   sudo chmod 777 $3
 fi
 
-# Map storage account to drive if 4 parameters exist.
+# Map storage account to drive if required parameters exist.
 if [ ! -z $3 ]; then
   #added in code to check if the map data command is already in the fstab file
   MAPVALUE="//mount -t nfs $1.file.core.windows.net/$2 $3 -o vers=4,minorversion=1,sec=sys,nconnect=4"
   if !( grep //etc/fstab -e "$MAPVALUE" ); then
-    sudo echo $MAPVALUE  >> /etc/fstab 
-    sudo echo "mappped $MAPVAULE"
+     echo $MAPVALUE  >> /etc/fstab 
+     echo "mappped $MAPVAULE"
   fi
 fi 
 
