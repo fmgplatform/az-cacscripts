@@ -22,8 +22,8 @@ fi
 #fi
 
 #sudo chmod 600 /etc/smbcredentials/$1.cred
-
-sudo apt-get -y update
+sudo apt update && sudo apt upgrade -Y
+sudo apt install libnfs-utils -y
 sudo apt-get -y install nfs-common
 sudo apt-get -y install nfs-kernel-server
 
@@ -62,6 +62,8 @@ sudo chmod 777 /data/files
 sudo chmod 777 /data/export
 sudo mkdir -p /tmp/fvrc 
 sudo chmod 777 /tmp/fvrc
+sudo chmod 777 /data/boomi/jre_backup/bin/java
+sudo chmod 777 /data/boomi/jre/bin/java
 
 export INSTALL4J_JAVA_HOME=/data/boomi/jre
 
